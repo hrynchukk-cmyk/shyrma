@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ширма Затишку — Стиль, приватність та комфорт</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F8F3EC;
+      --cream-2:  #F0E8DB;
+      --brown-dk: #2E1E12;
+      --brown-md: #6B3F24;
+      --brown-lt: #A0683A;
+      --gold:     #C4933A;
+      --gold-lt:  #E8C06A;
+      --text:     #2C1F14;
+      --text-2:   #5C4433;
+      --white:    #FFFDF9;
+      --red:      #C0392B;
+      --r:        12px;
+      --r-sm:     6px;
+      --max:      1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .ann-bar {
+      background: var(--brown-dk);
+      color: var(--gold-lt);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--cream-2);
+      padding: 18px 24px;
+      text-align: center;
+    }
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--brown-dk);
+      letter-spacing: .02em;
+    }
+    .brand-tagline {
+      font-size: 12px;
+      color: var(--text-2);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--brown-dk);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ── TIMER ── */
+    .timer-wrap {
+      background: var(--brown-dk);
+      border-radius: var(--r);
+      padding: 14px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .timer-label {
+      color: var(--gold-lt);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .timer-units { display: flex; justify-content: center; gap: 12px; }
+    .timer-unit  { text-align: center; }
+    .timer-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      min-width: 52px;
+      display: block;
+    }
+    .timer-sep { font-size: 32px; color: var(--gold); align-self: flex-start; padding-top: 4px; }
+    .timer-lbl  { font-size: 10px; color: var(--gold-lt); text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+
+    /* ── BADGES ── */
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .badge {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--cream); border: 1px solid var(--cream-2);
+      border-radius: 100px; padding: 6px 12px;
+      font-size: 12px; font-weight: 600; color: var(--text-2);
+    }
+    .badge-icon { font-size: 14px; }
+
+    /* ── PRICE BLOCK ── */
+    .price-block {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+      border: 2px solid var(--cream-2);
+      border-radius: var(--r);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .price-old-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .price-old-label { font-size: 13px; color: var(--text-2); }
+    .price-old { font-size: 16px; color: #9E8B7A; text-decoration: line-through; font-weight: 600; }
+    .savings-tag {
+      background: var(--red); color: #fff;
+      font-size: 11px; font-weight: 700;
+      border-radius: 100px; padding: 2px 8px; letter-spacing: .02em;
+    }
+    .price-new-row { display: flex; align-items: baseline; gap: 8px; }
+    .price-new-label { font-size: 13px; color: var(--text-2); }
+    .price-new {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 700; color: var(--brown-dk); line-height: 1;
+    }
+    .price-currency { font-size: 20px; color: var(--brown-md); font-weight: 700; }
+
+    /* ── STOCK BAR ── */
+    .stock-bar { margin-bottom: 16px; }
+    .stock-info { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+    .stock-left { color: var(--red); font-weight: 700; }
+    .stock-total { color: var(--text-2); }
+    .progress-track { background: var(--cream-2); border-radius: 100px; height: 6px; overflow: hidden; }
+    .progress-fill {
+      background: linear-gradient(90deg, var(--gold) 0%, var(--red) 100%);
+      height: 100%; width: 99%; border-radius: 100px;
+    }
+
+    /* ── CTA ── */
+    .cta-btn {
+      display: block; width: 100%;
+      background: var(--brown-dk); color: var(--gold-lt);
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px; font-weight: 800; letter-spacing: .06em;
+      text-transform: uppercase; text-align: center;
+      border: none; border-radius: var(--r);
+      padding: 18px 24px; cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      margin-bottom: 12px;
+    }
+    .cta-btn:hover { background: var(--brown-md); }
+    .cta-btn:active { transform: scale(.98); }
+    .cta-sub { text-align: center; font-size: 12px; color: var(--text-2); }
+
+    /* ── HERO ── */
+    .hero-section { background: var(--white); }
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 20px 36px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .hero-image {
+      width: 100%; border-radius: var(--r); overflow: hidden;
+      background: var(--cream-2);
+      order: -1;
+    }
+    .hero-image img { width: 100%; height: auto; display: block; }
+    .hero-left { order: 0; }
+
+    /* ── DESCRIPTION ── */
+    .desc-section { background: var(--white); }
+    .desc-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .desc-img { border-radius: var(--r); overflow: hidden; }
+    .desc-img img { width: 100%; height: auto; display: block; }
+    .desc-text { font-size: 15px; color: var(--text-2); line-height: 1.8; text-wrap: pretty; }
+
+    /* ── SPECS ── */
+    .specs-section { background: var(--cream); }
+    .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .spec-card {
+      background: var(--white); border: 1px solid var(--cream-2);
+      border-radius: var(--r-sm); padding: 14px 16px;
+    }
+    .spec-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-2); margin-bottom: 4px; }
+    .spec-value { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--brown-dk); }
+
+    /* ── USE CASES ── */
+    .use-section { background: var(--white); }
+    .use-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .use-img { border-radius: var(--r); overflow: hidden; }
+    .use-img img { width: 100%; height: auto; display: block; }
+    .use-list { display: flex; flex-direction: column; gap: 16px; }
+    .use-item { display: flex; gap: 14px; align-items: flex-start; }
+    .use-icon {
+      width: 40px; height: 40px; background: var(--cream);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .use-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--brown-dk); margin-bottom: 2px; }
+    .use-text span   { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── WHY ── */
+    .why-section { background: var(--brown-dk); color: #fff; }
+    .why-section .section-title { color: var(--gold-lt); }
+    .why-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .why-item { display: flex; gap: 14px; align-items: flex-start; }
+    .why-check {
+      width: 28px; height: 28px; background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .why-check svg { width: 14px; height: 14px; }
+    .why-text strong { display: block; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .why-text span   { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+    /* ── GALLERY ── */
+    .gallery-section { background: var(--cream); }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gallery-item { border-radius: var(--r-sm); overflow: hidden; }
+    .gallery-item img { width: 100%; height: auto; display: block; }
+    .gallery-wide { margin-top: 10px; }
+
+    /* ── REVIEWS ── */
+    .reviews-section { background: var(--white); }
+    .reviews-list { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .review-card { background: var(--cream); border-radius: var(--r); overflow: hidden; }
+    .review-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-bottom: 1px solid var(--cream-2);
+    }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0; background: var(--cream-2);
+    }
+    .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .review-name  { font-weight: 700; font-size: 14px; color: var(--brown-dk); }
+    .review-time  { font-size: 11px; color: var(--text-2); margin-top: 1px; }
+    .review-stars { color: var(--gold); font-size: 13px; margin-top: 2px; }
+    .review-body  { padding: 14px 16px; }
+    .review-bubble {
+      background: var(--white); border-radius: 0 var(--r-sm) var(--r-sm) var(--r-sm);
+      padding: 12px 14px; font-size: 13px; color: var(--text);
+      line-height: 1.6; margin-bottom: 10px; border: 1px solid var(--cream-2);
+    }
+    .review-reply { display: flex; gap: 8px; margin-top: 10px; align-items: flex-start; }
+    .reply-icon {
+      width: 28px; height: 28px; background: var(--brown-dk); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .reply-icon svg { width: 13px; height: 13px; fill: var(--gold-lt); }
+    .reply-bubble {
+      background: var(--brown-dk); border-radius: var(--r-sm) var(--r-sm) var(--r-sm) 0;
+      padding: 8px 12px; font-size: 12px; color: rgba(255,255,255,.8); line-height: 1.5;
+    }
+
+    /* ── HOW TO ORDER ── */
+    .how-section { background: var(--cream); }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 16px; align-items: flex-start; position: relative; padding-bottom: 24px; }
+    .step:last-child { padding-bottom: 0; }
+    .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .step-num {
+      width: 44px; height: 44px; background: var(--brown-dk); color: var(--gold-lt);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; flex-shrink: 0;
+    }
+    .step-line { width: 2px; flex: 1; background: var(--cream-2); margin-top: 6px; min-height: 20px; }
+    .step:last-child .step-line { display: none; }
+    .step-content { padding-top: 10px; }
+    .step-title { font-weight: 700; font-size: 15px; color: var(--brown-dk); margin-bottom: 3px; }
+    .step-desc  { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── ORDER FORM ── */
+    .order-section { background: var(--white); }
+    .order-section .section-title { text-align: center; }
+    .order-section .divider { margin: 0 auto 20px; }
+    .order-inner { max-width: 600px; margin: 0 auto; }
+    .order-form { display: flex; flex-direction: column; gap: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; }
+    .form-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); }
+    .form-input {
+      background: var(--cream); border: 2px solid var(--cream-2);
+      border-radius: var(--r-sm); padding: 13px 16px;
+      font-family: 'Nunito', sans-serif; font-size: 15px; color: var(--text);
+      outline: none; transition: border-color .2s; width: 100%;
+    }
+    .form-input:focus { border-color: var(--brown-md); }
+    .form-input::placeholder { color: #B8A898; }
+    .form-note { font-size: 11px; color: var(--text-2); text-align: center; line-height: 1.6; padding: 0 12px; }
+    .form-delivery-note {
+      background: var(--cream); border-radius: var(--r-sm);
+      padding: 12px 16px; font-size: 13px; color: var(--text-2);
+      border-left: 3px solid var(--gold); line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown-dk); padding: 40px 24px;
+      text-align: center; color: rgba(255,255,255,.5);
+    }
+    .footer-inner { max-width: var(--max); margin: 0 auto; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold-lt); margin-bottom: 8px; }
+    .footer-address { font-size: 12px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a {
+      color: rgba(255,255,255,.4); font-size: 11px; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .06em; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold-lt); }
+
+    /* ── STICKY BAR ── */
+    .sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--white); border-top: 2px solid var(--cream-2);
+      padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+      z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+    }
+    .sticky-price { flex: 1; }
+    .sticky-old  { font-size: 11px; color: #9E8B7A; text-decoration: line-through; }
+    .sticky-new  { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--brown-dk); line-height: 1; }
+    .sticky-cta  {
+      background: var(--brown-dk); color: var(--gold-lt); border: none;
+      border-radius: var(--r-sm); padding: 12px 22px;
+      font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase; cursor: pointer;
+      transition: background .2s; text-decoration: none;
+    }
+    .sticky-cta:hover { background: var(--brown-md); }
+
+    /* mid-page CTA wrapper */
+    .midcta { background: var(--cream); }
+    .midcta .section { padding-top: 0; }
+
+    /* ═══════════════════════════════════════
+       DESKTOP  ≥ 900px
+    ═══════════════════════════════════════ */
+    @media (min-width: 900px) {
+
+      /* Sticky bar hidden on desktop */
+      .sticky-bar { display: none; }
+
+      .brand-name    { font-size: 36px; }
+      .section-title { font-size: 38px; }
+      .section       { padding: 72px 48px; }
+
+      /* ── HERO: 2 columns ── */
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+        padding: 56px 48px;
+      }
+      .hero-image { position: sticky; top: 24px; order: 0; }
+      .hero-left  { order: 0; }
+
+      /* ── DESCRIPTION: 2 columns ── */
+      .desc-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+
+      /* ── SPECS: 3 columns ── */
+      .specs-grid { grid-template-columns: repeat(3, 1fr); }
+      .spec-value { font-size: 22px; }
+
+      /* ── USE CASES: image left, list right ── */
+      .use-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: start;
+      }
+      .use-inner .section-title,
+      .use-inner .divider { display: block; }
+
+      /* ── WHY: 2 columns ── */
+      .why-list { grid-template-columns: 1fr 1fr; gap: 20px 40px; }
+
+      /* ── GALLERY: 3 columns ── */
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-wide { display: none; } /* 3rd image already in the grid on desktop */
+
+      /* ── REVIEWS: 3 columns ── */
+      .reviews-list { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+      /* ── HOW TO ORDER: horizontal steps ── */
+      .steps { flex-direction: row; align-items: flex-start; gap: 0; }
+      .step  { flex-direction: column; align-items: center; text-align: center; padding-bottom: 0; padding-right: 0; flex: 1; }
+      .step-left { flex-direction: row; align-items: center; width: 100%; margin-bottom: 20px; }
+      .step-num  { flex-shrink: 0; width: 56px; height: 56px; font-size: 24px; }
+      .step-line { width: auto; height: 2px; flex: 1; margin: 0 0 0 8px; min-height: unset; }
+      .step:last-child .step-line { display: block; opacity: 0; }
+      .step-content { padding-top: 0; }
+      .step-title { font-size: 16px; }
+
+      /* ── ORDER FORM: 2 columns for fields ── */
+      .form-row { grid-template-columns: 1fr 1fr; }
+
+      /* ── FOOTER ── */
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        text-align: left;
+      }
+      .footer-brand   { margin-bottom: 4px; }
+      .footer-address { margin-bottom: 0; }
+      .footer-links   { justify-content: flex-end; }
+    }
+
+    @media (min-width: 1200px) {
+      .hero-inner { padding: 72px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="ann-bar">Безкоштовна доставка по всій Україні · Оплата при отриманні · Повернення 14 днів</div>
+
+<!-- Header -->
+<header>
+  <div class="brand-name">Ширма Затишку</div>
+  <div class="brand-tagline">Стиль · Приватність · Комфорт</div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero-section">
+  <div class="hero-inner">
+
+    <!-- Left: CTA block -->
+    <div class="hero-left">
+      <div class="timer-wrap">
+        <div class="timer-label">Акція завершується через</div>
+        <div class="timer-units">
+          <div class="timer-unit">
+            <span class="timer-num" id="hours">00</span>
+            <div class="timer-lbl">годин</div>
+          </div>
+          <div class="timer-sep">:</div>
+          <div class="timer-unit">
+            <span class="timer-num" id="mins">00</span>
+            <div class="timer-lbl">хвилин</div>
+          </div>
+          <div class="timer-sep">:</div>
+          <div class="timer-unit">
+            <span class="timer-num" id="secs">00</span>
+            <div class="timer-lbl">секунд</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="badges">
+        <div class="badge"><span class="badge-icon">🚚</span> Безкоштовна доставка</div>
+        <div class="badge"><span class="badge-icon">⏳</span> Обмежена пропозиція</div>
+        <div class="badge"><span class="badge-icon">💳</span> Оплата при отриманні</div>
+      </div>
+
+      <div class="price-block">
+        <div class="price-old-row">
+          <span class="price-old-label">Звичайна ціна:</span>
+          <span class="price-old">5 798 грн</span>
+          <span class="savings-tag">−50%</span>
+        </div>
+        <div class="price-new-row">
+          <span class="price-new-label">Ваша ціна:</span>
+          <span class="price-new">2 899</span>
+          <span class="price-currency">грн</span>
+        </div>
+      </div>
+
+      <div class="stock-bar">
+        <div class="stock-info">
+          <span class="stock-left">Залишилось по акції: 6 шт.</span>
+          <span class="stock-total">Замовлень: 648</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <a href="#order" class="cta-btn">Замовити зараз</a>
+      <p class="cta-sub">Доставка 2–3 дні · Оплата при отриманні · Повернення 14 днів</p>
+    </div>
+
+    <!-- Right: Product image -->
+    <div class="hero-image">
+      <img src="https://shyrma.seasonshop.online/images1/1.webp" alt="Ширма Затишку" loading="eager">
+    </div>
+
+  </div>
+</section>
+
+<!-- ── DESCRIPTION ── -->
+<section class="desc-section">
+  <div class="section">
+    <div class="desc-inner">
+      <div class="desc-img">
+        <img src="https://shyrma.seasonshop.online/images1/2.webp" alt="Ширма в інтер'єрі" loading="lazy">
+      </div>
+      <div class="desc-body">
+        <div class="divider"></div>
+        <h2 class="section-title">Ваш особистий простір — без ремонту</h2>
+        <p class="desc-text">
+          Ширма — практичне рішення для швидкого зонування простору та створення затишної атмосфери вдома чи в офісі. Міцний дерев'яний каркас забезпечує стійкість конструкції, а легке полотно гармонійно вписується в будь-який інтер'єр.<br><br>
+          Ширма легко складається, займає мінімум місця та зручно переноситься. Підходить для квартири, салону краси, офісу, студії або дачі.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPECS ── -->
+<section class="specs-section">
+  <div class="section">
+    <div class="divider"></div>
+    <h2 class="section-title">Характеристики</h2>
+    <div class="specs-grid">
+      <div class="spec-card"><div class="spec-label">Матеріал каркаса</div><div class="spec-value">Натуральне дерево</div></div>
+      <div class="spec-card"><div class="spec-label">Матеріал полотна</div><div class="spec-value">Штучне полотно</div></div>
+      <div class="spec-card"><div class="spec-label">Кількість секцій</div><div class="spec-value">4 секції</div></div>
+      <div class="spec-card"><div class="spec-label">Висота</div><div class="spec-value">180 см</div></div>
+      <div class="spec-card"><div class="spec-label">Ширина</div><div class="spec-value">160 см</div></div>
+      <div class="spec-card"><div class="spec-label">Вага</div><div class="spec-value">5 кг</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STANDALONE PHOTO ── -->
+<div style="background: var(--white);">
+  <div style="max-width: var(--max); margin: 0 auto; padding: 0 24px 40px;">
+    <img src="https://shyrma.seasonshop.online/images1/3.webp" alt="" style="width:100%; border-radius: var(--r); display:block;" loading="lazy">
+  </div>
+</div>
+
+<!-- ── USE CASES ── -->
+<section class="use-section">
+  <div class="section">
+    <div class="use-inner">
+      <div class="use-img">
+        <img src="https://shyrma.seasonshop.online/images1/4.webp" alt="Застосування ширми" loading="lazy">
+      </div>
+      <div class="use-body">
+        <div class="divider"></div>
+        <h2 class="section-title">Оціните, наскільки це зручно</h2>
+        <div class="use-list">
+          <div class="use-item">
+            <div class="use-icon">🏠</div>
+            <div class="use-text">
+              <strong>Не вистачає особистого простору вдома?</strong>
+              <span>Ширма швидко розділить кімнату на окремі зони без ремонту та зайвих витрат.</span>
+            </div>
+          </div>
+          <div class="use-item">
+            <div class="use-icon">💼</div>
+            <div class="use-text">
+              <strong>Потрібно відокремити робоче місце?</strong>
+              <span>Легко створює затишний куточок для роботи, відпочинку або приватності.</span>
+            </div>
+          </div>
+          <div class="use-item">
+            <div class="use-icon">✨</div>
+            <div class="use-text">
+              <strong>Хочете зробити інтер'єр більш стильним?</strong>
+              <span>Сучасний дизайн гармонійно поєднується з будь-яким оформленням кімнати.</span>
+            </div>
+          </div>
+          <div class="use-item">
+            <div class="use-icon">📦</div>
+            <div class="use-text">
+              <strong>Рішення, яке не займає багато місця</strong>
+              <span>Ширма швидко складається та зручно зберігається у квартирі чи офісі.</span>
+            </div>
+          </div>
+          <div class="use-item">
+            <div class="use-icon">🌿</div>
+            <div class="use-text">
+              <strong>Шукаєте практичний варіант на роки?</strong>
+              <span>Міцний дерев'яний каркас забезпечує стійкість та надійність у щоденному використанні.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY CHOOSE ── -->
+<section class="why-section">
+  <div class="section">
+    <div class="divider" style="background: var(--gold);"></div>
+    <h2 class="section-title">Чому обирають саме цю ширму</h2>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="why-text"><strong>Швидке зонування простору</strong><span>Допомагає легко відокремити робочу зону, спальне місце або куточок для відпочинку.</span></div>
+      </div>
+      <div class="why-item">
+        <div class="why-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="why-text"><strong>Більше приватності</strong><span>Вдома, в офісі чи салоні — без ремонту та перепланування.</span></div>
+      </div>
+      <div class="why-item">
+        <div class="why-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="why-text"><strong>Стильний інтер'єр</strong><span>Сучасний дизайн гармонійно поєднується з різними стилями кімнат.</span></div>
+      </div>
+      <div class="why-item">
+        <div class="why-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="why-text"><strong>Для будь-якого місця</strong><span>Квартира, офіс, салон краси, студія або дача — скрізь буде доречна.</span></div>
+      </div>
+      <div class="why-item">
+        <div class="why-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="why-text"><strong>Практично та зручно</strong><span>Швидко складається, займає мінімум місця та легко переноситься.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery-section">
+  <div class="section">
+    <div class="divider"></div>
+    <h2 class="section-title">Ширма в інтер'єрі</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://shyrma.seasonshop.online/images1/5.webp" alt="Ширма фото 1" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://shyrma.seasonshop.online/images1/6.webp" alt="Ширма фото 2" loading="lazy">
+      </div>
+      <!-- 3rd image: in grid on desktop, separate below on mobile -->
+      <div class="gallery-item" id="gallery-3-desktop" style="display:none;">
+        <img src="https://shyrma.seasonshop.online/images1/7.webp" alt="Ширма фото 3" loading="lazy">
+      </div>
+    </div>
+    <div class="gallery-wide" id="gallery-3-mobile">
+      <div class="gallery-item">
+        <img src="https://shyrma.seasonshop.online/images1/7.webp" alt="Ширма фото 3" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MID-PAGE CTA ── -->
+<div class="midcta">
+  <div class="section" style="padding-top: 0; padding-bottom: 48px;">
+    <a href="#order" class="cta-btn" style="max-width: 480px; margin: 0 auto; display: block;">Замовити зараз — 2 899 грн</a>
+  </div>
+</div>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews-section">
+  <div class="section">
+    <div class="divider"></div>
+    <h2 class="section-title">Відгуки покупців</h2>
+    <div class="reviews-list">
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar"><img src="https://shyrma.seasonshop.online/images1/r1.webp" alt="Андрій" loading="lazy"></div>
+          <div>
+            <div class="review-name">Андрій</div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-time">Вчора, 19:14</div>
+          </div>
+        </div>
+        <div class="review-body">
+          <div class="review-bubble">В офісі взяли декілька штук для зонування робочих місць. Дуже зручно, бо не потрібно нічого свердлити чи будувати. Поставив де треба — і готово 🔥</div>
+          <div class="review-reply">
+            <div class="reply-icon"><svg viewBox="0 0 14 14"><path d="M7 1C3.7 1 1 3.4 1 6.3c0 1.2.4 2.3 1.2 3.2L1 13l3.7-1.2C5.5 12.2 6.2 12.4 7 12.4c3.3 0 6-2.3 6-5.1S10.3 1 7 1z"/></svg></div>
+            <div class="reply-bubble">Дякуємо за відгук, Андрій! Раді, що ширма підійшла для офісу ❤️</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar"><img src="https://shyrma.seasonshop.online/images1/r2.webp" alt="Олена" loading="lazy"></div>
+          <div>
+            <div class="review-name">Олена</div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-time">Сьогодні, 09:12</div>
+          </div>
+        </div>
+        <div class="review-body">
+          <div class="review-bubble">Купили ширму щоб відділити робочий куточок вдома, бо діти постійно бігали поруч 😅 Реально стало комфортніше працювати. Поставили за 5 хвилин і кімната вже виглядає зовсім по-іншому 👍</div>
+          <div class="review-reply">
+            <div class="reply-icon"><svg viewBox="0 0 14 14"><path d="M7 1C3.7 1 1 3.4 1 6.3c0 1.2.4 2.3 1.2 3.2L1 13l3.7-1.2C5.5 12.2 6.2 12.4 7 12.4c3.3 0 6-2.3 6-5.1S10.3 1 7 1z"/></svg></div>
+            <div class="reply-bubble">Дякуємо, Олено! Приємно чути, що ширма допомагає ❤️</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar"><img src="https://shyrma.seasonshop.online/images1/r3.webp" alt="Наталія" loading="lazy"></div>
+          <div>
+            <div class="review-name">Наталія</div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-time">Сьогодні, 09:13</div>
+          </div>
+        </div>
+        <div class="review-body">
+          <div class="review-bubble">Брала для салону, щоб зробити окрему зону для клієнтів. Виглядає акуратно й дорого, а головне — не треба ніяких ремонтів 😄 Легка, зручно переставляти по кімнаті.</div>
+          <div class="review-reply">
+            <div class="reply-icon"><svg viewBox="0 0 14 14"><path d="M7 1C3.7 1 1 3.4 1 6.3c0 1.2.4 2.3 1.2 3.2L1 13l3.7-1.2C5.5 12.2 6.2 12.4 7 12.4c3.3 0 6-2.3 6-5.1S10.3 1 7 1z"/></svg></div>
+            <div class="reply-bubble">Дякуємо, Наталіє! Чудово, що ширма прикрасила ваш салон ❤️</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO ORDER ── -->
+<section class="how-section">
+  <div class="section">
+    <div class="divider"></div>
+    <h2 class="section-title">Як замовити?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-content"><div class="step-title">Залишаєте заявку</div><div class="step-desc">Заповніть форму — ім'я та номер телефону.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-content"><div class="step-title">Ми зв'яжемося</div><div class="step-desc">Уточнимо деталі замовлення та адресу доставки.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-content"><div class="step-title">Відправляємо</div><div class="step-desc">Доставляємо протягом 2–3 робочих днів.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-content"><div class="step-title">Отримуєте та оплачуєте</div><div class="step-desc">Оплата при отриманні — жодного ризику!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ORDER FORM ── -->
+<section class="order-section" id="order">
+  <div class="section">
+    <div class="divider" style="margin: 0 auto 20px;"></div>
+    <h2 class="section-title">Оформити замовлення</h2>
+    <div class="order-inner">
+      <div class="price-block" style="margin-bottom: 20px;">
+        <div class="price-old-row">
+          <span class="price-old-label">Звичайна ціна:</span>
+          <span class="price-old">5 798 грн</span>
+          <span class="savings-tag">−50%</span>
+        </div>
+        <div class="price-new-row">
+          <span class="price-new-label">Ваша ціна:</span>
+          <span class="price-new">2 899</span>
+          <span class="price-currency">грн</span>
+        </div>
+      </div>
+      <form class="order-form" name="zamovlennya" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="zamovlennya">
+        <p hidden><label>Не заповнювати: <input name="bot-field"></label></p>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="name">Ваше ім'я</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Ім'я та прізвище" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="phone">Номер телефону</label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+38 (0__) ___-__-__" required>
+          </div>
+        </div>
+        <div class="form-delivery-note">
+          Доставка Новою Поштою або Укрпоштою. Оплата при отриманні — ви нічим не ризикуєте.
+        </div>
+        <button type="submit" class="cta-btn" style="margin-bottom: 0;">Підтвердити замовлення</button>
+        <p class="form-note">Натискаючи кнопку, ви погоджуєтесь з <a href="https://shyrma.seasonshop.online/polici.html" style="color: var(--brown-md);">Політикою конфіденційності</a></p>
+      </form>
+      <div id="success-msg" style="display:none; text-align:center; padding: 40px 0;">
+        <div style="font-size:56px; margin-bottom: 16px;">✅</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size: 28px; font-weight:700; color: var(--brown-dk); margin-bottom: 10px;">Замовлення прийнято!</div>
+        <div style="font-size:15px; color: var(--text-2);">Ми зв'яжемося з вами найближчим часом для підтвердження.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Ширма Затишку</div>
+      <div class="footer-address">м. Харків · вул. Героїв Харкова, 236</div>
+    </div>
+    <div></div>
+    <div class="footer-links">
+      <a href="https://shyrma.seasonshop.online/polici.html">Політика конфіденційності</a>
+      <a href="https://shyrma.seasonshop.online/obmen.html">Обмін та повернення</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── STICKY BAR (mobile only) ── -->
+<div class="sticky-bar">
+  <div class="sticky-price">
+    <div class="sticky-old">5 798 грн</div>
+    <div class="sticky-new">2 899 <span style="font-size:16px; font-family:'Nunito',sans-serif; font-weight:700;">грн</span></div>
+  </div>
+  <a href="#order" class="sticky-cta">Замовити</a>
+</div>
+
+<script>
+  // ── Gallery: show 3rd image in grid on desktop, below on mobile ──
+  function updateGallery() {
+    var isDesktop = window.innerWidth >= 900;
+    document.getElementById('gallery-3-desktop').style.display = isDesktop ? 'block' : 'none';
+    document.getElementById('gallery-3-mobile').style.display  = isDesktop ? 'none'  : 'block';
+  }
+  updateGallery();
+  window.addEventListener('resize', updateGallery);
+
+  // ── Countdown timer ──
+  (function() {
+    var key = 'shyrma_deadline';
+    var saved = localStorage.getItem(key);
+    var deadline;
+    if (saved) {
+      deadline = new Date(saved);
+      if (deadline < new Date()) deadline = null;
+    }
+    if (!deadline) {
+      deadline = new Date();
+      deadline.setHours(deadline.getHours() + 5);
+      deadline.setMinutes(deadline.getMinutes() + 37);
+      deadline.setSeconds(deadline.getSeconds() + 22);
+      localStorage.setItem(key, deadline.toISOString());
+    }
+    function update() {
+      var diff = Math.max(0, deadline - new Date());
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('secs').textContent  = String(s).padStart(2,'0');
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ── Form submit: send to Netlify Forms, then show success message ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Netlify form error: ' + res.status);
+      form.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }).catch(function() {
+      btn.disabled = false;
+      alert('Не вдалося відправити замовлення. Спробуйте ще раз або зателефонуйте нам.');
+    });
+  }
+</script>
+</body>
+</html>
